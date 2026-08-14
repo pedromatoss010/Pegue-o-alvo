@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Pegue o Alvo</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <main class="container"> 
+        <header class="header">
+            <h1>Pegue o Alvo</h1>
+
+            <p>
+                Clique no alvo o máximo de vezes possível
+            </p>
+        </header>
+
+        <section class="painel">
+            <div class="info">
+                <span>Pontos</span>
+                <strong id="score">0</strong>
+            </div>
+
+            <div class="info">
+                <span>Tempo</span>
+                <strong id="time">30</strong>
+            </div>
+
+            <div class="info">
+                <span>Recorde</span>
+                <strong id="record">0</strong>
+            </div>
+        </section>
+
+        <button id="startButton">
+            Começar Jogo
+        </button>
+
+        <section id="gameArea">
+            <div id="message">
+                Clique em "Começar Jogo"
+            </div>
+            <div id="target"></div>
+        </section>
+
+        <footer>
+            Desenvolvido por Pedro Gustavo
+        </footer>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
