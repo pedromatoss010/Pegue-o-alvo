@@ -83,7 +83,9 @@ bomba.addEventListener("click", function (event) {
         score -= 15
         combo = 0
         
-        scoreElement.textContent = score;        
+        scoreElement.textContent = score;  
+        
+        moveTarget();
     }
 })
 
