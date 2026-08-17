@@ -1,6 +1,7 @@
 let score = 0;
 let time = 30;
 let record = 0;
+let combo = 0;
 
 let gameRunnig = false;
 let timer;
@@ -14,6 +15,7 @@ const startButton = document.getElementById("startButton");
 const gameArea = document.getElementById("gameArea");
 const target = document.getElementById("target");
 const message = document.getElementById("message");
+const messageCombo = document.getElementById("combo")
 
 record = Number(localStorage.getItem("record")) || 0;
 recordElement.textContent = record;
@@ -76,8 +78,18 @@ target.addEventListener("click", function (event) {
     event.stopPropagation(); 
 
     if (gameRunnig) {
-        score++;
+        combo++;
+        
+        const multiplicador = 1 + Math.floor(combo / 5);
+
+        score += multiplicador
         scoreElement.textContent = score;
+        messageCombo.textContent = "Combo X" + multiplicador;
+
+        messageCombo.classList.remove('pular');
+        void messageCombo.offsetWidth; // truque pra "resetar" a animação
+        messageCombo.classList.add('pular');
+        
         moveTarget();
     }
 });
@@ -86,8 +98,10 @@ target.addEventListener("click", function (event) {
 gameArea.addEventListener("click", function () {
     if (gameRunnig) {
         // Diminui 1 ponto, garantindo que não fique abaixo de 0
+        combo = 0;
         score = score - 1
         scoreElement.textContent = score;
+        messageCombo.textContent= ''
 
         const maxX = gameArea.clientWidth - target.clientWidth;
         const maxY = gameArea.clientHeight - target.clientHeight;
