@@ -73,6 +73,7 @@ function moveBomb() {
     bomba.style.left = randomX + "px";
     bomba.style.top = randomY + "px";
 
+    setTimeout(moveTarget, 800);
     
 }
 
