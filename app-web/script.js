@@ -73,14 +73,14 @@ function moveBomb() {
     bomba.style.left = randomX + "px";
     bomba.style.top = randomY + "px";
 
-    moveTarget();
+    
 }
 
 bomba.addEventListener("click", function (event) {
     event.stopPropagation();
 
     if (gameRunnig) {
-        score--;
+        score -= 15
         combo = 0
         
         scoreElement.textContent = score;        
