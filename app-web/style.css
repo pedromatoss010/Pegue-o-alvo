@@ -128,6 +128,18 @@ body {
     transform: scale(1.15);
 }
 
+#bomba {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-image: url(images/bomba-removebg-preview.png);
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.7);
+    transition: transform 0.1s;
+}
+
 footer {
     margin-top: 20px;
     color: #64748b;

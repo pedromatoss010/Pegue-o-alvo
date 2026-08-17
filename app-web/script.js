@@ -89,7 +89,7 @@ target.addEventListener("click", function (event) {
         messageCombo.classList.remove('pular');
         void messageCombo.offsetWidth; // truque pra "resetar" a animação
         messageCombo.classList.add('pular');
-        
+
         moveTarget();
     }
 });
