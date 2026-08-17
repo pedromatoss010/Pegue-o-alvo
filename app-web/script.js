@@ -88,10 +88,9 @@ bomba.addEventListener("click", function (event) {
 })
 
 function moveTarget() {
+    const sorteio = Math.random();
 
-    const sorteio = Math.random(0, 100);
-
-    if (sorteio < 70) {
+    if (sorteio < 0.2) {
         bomba.style.display = "block";
         target.style.display = "none";
         moveBomb();
