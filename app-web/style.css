@@ -175,4 +175,7 @@ footer {
     #gameArea {
         height: 400px;
     }
+    #gameArea {
+        font-size: 10px;
+    }
 }
