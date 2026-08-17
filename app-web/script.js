@@ -14,6 +14,7 @@ const startButton = document.getElementById("startButton");
 
 const gameArea = document.getElementById("gameArea");
 const target = document.getElementById("target");
+const bomba = document.getElementById("bomba")
 const message = document.getElementById("message");
 const messageCombo = document.getElementById("combo")
 
@@ -22,6 +23,7 @@ recordElement.textContent = record;
 
 // Adiciona velocidade/transição suave na bolinha
 target.style.transition = "all 0.15s ease";
+bomba.style.transition = "all 0.15s ease";
 
 startButton.addEventListener("click", startGame);
 
@@ -32,6 +34,7 @@ function startGame () {
     scoreElement.textContent = score;
     timeElement.textContent = time;
     target.style.display = "block";
+    bomba.style.display = "none"
     message.style.display = "none";
     startButton.textContent = "Reiniciar";
     moveTarget();
@@ -60,16 +63,51 @@ function updateTimer() {
         }
     }
 }
-
-function moveTarget() {
-    const maxX = gameArea.clientWidth - target.clientWidth;
-    const maxY = gameArea.clientHeight - target.clientHeight;
+function moveBomb() {
+    const maxX = gameArea.clientWidth - bomba.clientWidth;
+    const maxY = gameArea.clientHeight - bomba.clientHeight;
 
     const randomX = Math.floor(Math.random() * maxX);
     const randomY = Math.floor(Math.random() * maxY);
 
-    target.style.left = randomX + "px";
-    target.style.top = randomY + "px";
+    bomba.style.left = randomX + "px";
+    bomba.style.top = randomY + "px";
+
+    moveTarget();
+}
+
+bomba.addEventListener("click", function (event) {
+    event.stopPropagation();
+
+    if (gameRunnig) {
+        score--;
+        combo = 0
+        
+        scoreElement.textContent = score;        
+    }
+})
+
+function moveTarget() {
+
+    const sorteio = Math.random(0, 100);
+
+    if (sorteio < 70) {
+        bomba.style.display = "block";
+        target.style.display = "none";
+        moveBomb();
+    } else {  
+        bomba.style.display = "none";
+        target.style.display = "block";
+
+        const maxX = gameArea.clientWidth - target.clientWidth;
+        const maxY = gameArea.clientHeight - target.clientHeight;
+
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
+
+        target.style.left = randomX + "px";
+        target.style.top = randomY + "px";
+    }
 }
 
 // Clique na bolinha (acerto)

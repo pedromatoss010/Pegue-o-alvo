@@ -136,8 +136,12 @@ body {
     background-image: url(images/bomba-removebg-preview.png);
     cursor: pointer;
     display: none;
-    box-shadow: 0 0 20px rgba(239, 68, 68, 0.7);
+    /* box-shadow: 0 0 20px rgba(239, 68, 68, 0.7); */
     transition: transform 0.1s;
+}
+
+#bomba:hover {
+    transform: scale(1.15);
 }
 
 footer {
