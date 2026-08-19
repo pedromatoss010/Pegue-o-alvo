@@ -5,6 +5,7 @@ let combo = 0;
 
 let gameRunnig = false;
 let timer;
+let bombaAtivada = false;
 
 const scoreElement = document.getElementById("score");
 const timeElement = document.getElementById("time");
@@ -23,7 +24,6 @@ recordElement.textContent = record;
 
 // Adiciona velocidade/transição suave na bolinha
 target.style.transition = "all 0.15s ease";
-bomba.style.transition = "all 0.15s ease";
 
 startButton.addEventListener("click", startGame);
 
@@ -34,10 +34,9 @@ function startGame () {
     scoreElement.textContent = score;
     timeElement.textContent = time;
     target.style.display = "block";
-    bomba.style.display = "none"
     message.style.display = "none";
     startButton.textContent = "Reiniciar";
-    moveTarget();
+    chooseTarget();
     clearInterval(timer);
     timer = setInterval(updateTimer, 1000);
 }
@@ -63,54 +62,44 @@ function updateTimer() {
         }
     }
 }
-function moveBomb() {
-    const maxX = gameArea.clientWidth - bomba.clientWidth;
-    const maxY = gameArea.clientHeight - bomba.clientHeight;
+
+
+function virarBomba() {
+    target.classList.add("bomba");
+    bombaAtivada = true;
+    moveTarget();
+
+    setTimeout(chooseTarget, 800);
+}
+
+function voltarAoNormal() {
+    target.classList.remove("bomba");
+    bombaAtivada = false;
+    moveTarget();
+}
+
+function chooseTarget() {
+    const sorteio = Math.random();
+
+    if (sorteio < 0.2) {
+        virarBomba();
+    } else {         
+        voltarAoNormal();   
+    }
+}
+
+function moveTarget() {
+
+    const maxX = gameArea.clientWidth - target.clientWidth;
+    const maxY = gameArea.clientHeight - target.clientHeight;
 
     const randomX = Math.floor(Math.random() * maxX);
     const randomY = Math.floor(Math.random() * maxY);
 
-    bomba.style.left = randomX + "px";
-    bomba.style.top = randomY + "px";
-
-    setTimeout(moveTarget, 800);
-    
+    target.style.left = randomX + "px";
+    target.style.top = randomY + "px";
 }
 
-bomba.addEventListener("click", function (event) {
-    event.stopPropagation();
-
-    if (gameRunnig) {
-        score -= 15
-        combo = 0
-        
-        scoreElement.textContent = score;  
-        
-        moveTarget();
-    }
-})
-
-function moveTarget() {
-    const sorteio = Math.random();
-
-    if (sorteio < 0.2) {
-        bomba.style.display = "block";
-        target.style.display = "none";
-        moveBomb();
-    } else {  
-        bomba.style.display = "none";
-        target.style.display = "block";
-
-        const maxX = gameArea.clientWidth - target.clientWidth;
-        const maxY = gameArea.clientHeight - target.clientHeight;
-
-        const randomX = Math.floor(Math.random() * maxX);
-        const randomY = Math.floor(Math.random() * maxY);
-
-        target.style.left = randomX + "px";
-        target.style.top = randomY + "px";
-    }
-}
 
 // Clique na bolinha (acerto)
 target.addEventListener("click", function (event) {
@@ -118,19 +107,28 @@ target.addEventListener("click", function (event) {
     event.stopPropagation(); 
 
     if (gameRunnig) {
-        combo++;
+        if (bombaAtivada) {
+            score -= 15;
+            combo = 0 ;
         
-        const multiplicador = 1 + Math.floor(combo / 5);
+            scoreElement.textContent = score;  
+        
+            chooseTarget();
+        } else {      
+            combo++;
+        
+            const multiplicador = 1 + Math.floor(combo / 5);
 
-        score += multiplicador
-        scoreElement.textContent = score;
-        messageCombo.textContent = "Combo X" + multiplicador;
+            score += multiplicador
+            scoreElement.textContent = score;
+            messageCombo.textContent = "Combo X" + multiplicador;
 
-        messageCombo.classList.remove('pular');
-        void messageCombo.offsetWidth; // truque pra "resetar" a animação
-        messageCombo.classList.add('pular');
+            messageCombo.classList.remove('pular');
+            void messageCombo.offsetWidth; // truque pra "resetar" a animação
+            messageCombo.classList.add('pular');
 
-        moveTarget();
+            chooseTarget();
+        } 
     }
 });
 

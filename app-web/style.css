@@ -128,19 +128,13 @@ body {
     transform: scale(1.15);
 }
 
-#bomba {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+#target.bomba {
     background-image: url(images/bomba-removebg-preview.png);
-    cursor: pointer;
-    display: none;
-    /* box-shadow: 0 0 20px rgba(239, 68, 68, 0.7); */
-    transition: transform 0.1s;
+    background-color: transparent;
+    box-shadow: none;
 }
 
-#bomba:hover {
+#target.bomba:hover {
     transform: scale(1.15);
 }
 
