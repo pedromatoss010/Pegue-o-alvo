@@ -23,4 +23,4 @@ Basta abrir o arquivo `index.html` no navegador, ou usar uma extensão tipo *Liv
 
 ## Deploy
 
-Hospedado no [Netlify](https://www.netlify.com/).
+Hospedado no pegue-o-alvo.netlify.app.
