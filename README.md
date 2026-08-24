@@ -2,6 +2,8 @@
 
 Joguinho web feito com HTML, CSS e JavaScript puro. Clique na bolinha antes do tempo acabar, monte combos e cuidado com a bomba!
 
+🔗 **Jogue agora:** [pegue-o-alvo.netlify.app](https://pegue-o-alvo.netlify.app/)
+
 ## Como jogar
 
 - Clique em **Jogar** para começar.
@@ -23,4 +25,4 @@ Basta abrir o arquivo `index.html` no navegador, ou usar uma extensão tipo *Liv
 
 ## Deploy
 
-Hospedado no pegue-o-alvo.netlify.app.
+Hospedado no [Netlify](https://www.netlify.com/): https://pegue-o-alvo.netlify.app/
